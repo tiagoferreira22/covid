@@ -1,0 +1,14 @@
+.Container{
+    padding: 40px 0;
+    
+}
+
+.Container h1{
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.Container h1 span{
+    color: #ffbb33;
+}

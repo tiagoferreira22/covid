@@ -1,0 +1,7 @@
+.btnModal{
+    transition: .5s;
+}
+
+.btnModal:hover{
+    transform: scale(1.2) ;
+}

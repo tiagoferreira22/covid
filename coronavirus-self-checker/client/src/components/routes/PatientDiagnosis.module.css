@@ -1,0 +1,49 @@
+h1{
+    text-align: center;
+}
+.divDiag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.divDiag img{
+    scale: 80%;
+    border-radius: 100%;
+}
+
+.voltarHome{
+    width: 60px;
+    height: 60px;
+    background: #ffbb33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    position: absolute;
+    top: 75px;
+}
+
+.voltarHome svg{
+    font-size: 60px;
+    transition: .5s;
+    padding: 12px;
+    color: #000;
+}
+
+.voltarHome svg:hover {
+    transform: rotate(360deg);
+}
+
+.forms{
+    display: flex;
+    gap: 50px;
+}
+
+.cardTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 5px;
+}

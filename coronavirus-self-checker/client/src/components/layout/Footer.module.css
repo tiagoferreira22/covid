@@ -1,0 +1,25 @@
+.footer {
+    width: 100%;
+    height: 70px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer p {
+    color: #e2e2e2;
+}
+
+.footer span {
+    color: #ffbb33;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #cbcbcb;
+    transition: 0.5s;
+}
+body.dark-mode .footer {
+    background: #e2e2e2 !important;
+}

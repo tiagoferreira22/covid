@@ -1,0 +1,53 @@
+.table tbody tr th,
+.table thead tr th,
+.table tbody tr td{
+    background: transparent;
+}
+
+.table tbody tr th,
+.table tbody tr td{
+    vertical-align: middle;
+}
+
+.table .mr * {
+    margin-right: 3px;
+}
+
+.table .mr button {
+    transition: 0.5s;
+    padding: 10px 15px;
+}
+
+.table .mr button:hover {
+    transform: translateY(-10px);
+}
+
+.table .mr button * {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table .alertDiagnostico{
+    text-transform: uppercase;
+}
+
+/* .table tfoot tr td{
+    background: #222;
+    border-radius: 20px;
+}
+
+.table tfoot td.tdFooter p {
+    color: #e2e2e2;
+}
+
+.table tfoot td.tdFooter span {
+    color: #ffbb33;
+}
+
+.table .tdFooter a {
+    text-decoration: none;
+    color: #cbcbcb;
+    transition: 0.5s;
+} */
