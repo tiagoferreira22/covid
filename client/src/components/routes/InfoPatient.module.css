@@ -6,6 +6,11 @@
     justify-content: center;
     align-items: center;
 }
+.divInfo .alertCenter p{
+    text-align: center;
+    margin-bottom: 0;
+}
+
 
 .divInfo img{
     scale: 80%;

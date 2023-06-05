@@ -21,15 +21,15 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: '/infopaciente',
+                path: '/infopaciente/:id',
                 element: <InfoPatient />
             },
             {
-                path: '/editionpaciente',
+                path: '/editionpaciente/:id',
                 element: <EditionPatient />
             },
             {
-                path: '/diagnosispatient',
+                path: '/diagnosispatient/:id',
                 element: <PatientDiagnosis />
             },
         ],

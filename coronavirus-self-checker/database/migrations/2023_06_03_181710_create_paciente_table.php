@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('paciente', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('cpf');
-            $table->string('telefone');
+            $table->string('status')->nullable()->default('sem_diagnostico');
+            $table->string('cpf', 15)->unique();
+            $table->string('telefone', 15);
             $table->date('dataNascimento');
-            $table->date('status');
             $table->string('foto');
             $table->timestamps();
         });

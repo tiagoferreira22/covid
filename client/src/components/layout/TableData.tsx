@@ -5,7 +5,7 @@ import { FaEye, FaArrowRight, FaPen, FaTrash } from 'react-icons/fa';
 //import FotoCaminho from '../assets/img/gato.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from './TableData.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
@@ -16,12 +16,13 @@ interface Paciente {
     cpf: string;
     telefone: string;
     dataNascimento: string;
+    status: string;
     foto: string;
 }
 
 export default function TableData() {
-    const dataAtual = new Date().getFullYear();
     const [paciente, setPaciente] = useState<Paciente[]>([]);
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +38,52 @@ export default function TableData() {
         fetchData();
     }, []);
 
+
+    useEffect(() => {
+        const findPaciente = async () => {
+          if (id) {
+            try {
+              const response = await axios.get(`http://localhost:8000/api/paciente/${id}`);
+              setPaciente(response.data);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        };
+      
+        findPaciente();
+      }, [id]);
+
+
+        const deletePaciente = async (id:number) => {
+            const deleteComfirmacao = confirm('Tem certeza que quer deletar esse paciente?')
+          if (deleteComfirmacao) {
+            try {
+                await axios.delete(`http://localhost:8000/api/paciente/${id}`);
+              const response = await axios.get(`http://localhost:8000/api/paciente/${id}`);
+              setPaciente(response.data);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        };
+      
+      function calcularIdade(dataNascimento: string): number {
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento);
+      
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const diferencaMeses = hoje.getMonth() - nascimento.getMonth();
+      
+        if (
+          diferencaMeses < 0 ||
+          (diferencaMeses === 0 && hoje.getDate() < nascimento.getDate())
+        ) {
+          idade--;
+        }
+      
+        return idade;
+      }
     return (
         <>
             <Card style={{ width: '100%', boxShadow: '2px 2px 10px #e5e5e5' }}>
@@ -58,30 +105,33 @@ export default function TableData() {
                                     <th scope="row">{pacientes.id}</th>
                                     <td>{pacientes.nome}</td>
                                     <td>{pacientes.cpf}</td>
-                                    <td>{pacientes.dataNascimento}</td>
-                                    <td>
-                                        <Alert
-                                            variant="secondary"
-                                            className={style.alertDiagnostico}
-                                        >
-                                            Paciente Não Diagnósticado
-                                        </Alert>
-                                    </td>
+                                    <td>{calcularIdade(pacientes.dataNascimento)}</td>
+                                    {pacientes.status === "sem_diagnostico" ? (
+                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="secondary">Não diagnosticado</Alert></td>
+                                    ) : pacientes.status === "sintomas_insuficientes" ? (
+                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="success">Sintomas insuficientes</Alert></td>
+                                    ) : pacientes.status === "potencial_infectado" ? (
+                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="warning">Potencial Infectado</Alert></td>
+                                    ) : pacientes.status === "possivel_infectado" ? (
+                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="danger">Possível infectado</Alert></td>
+                                    ) : (
+                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="info">Dados indisponíveis</Alert></td>
+                                    )}
                                     <td className={style.mr}>
-                                        <Link to={`/infopaciente/`}>
+                                        <Link to={`/infopaciente/${pacientes.id}`}>
                                             <Button variant="primary">
                                                 <FaEye />
                                             </Button>
                                         </Link>
-                                        <Link to={`/editionpaciente/`}>
+                                        <Link to={`/editionpaciente/${pacientes.id}`}>
                                             <Button variant="warning">
                                                 <FaPen />
                                             </Button>
                                         </Link>
-                                        <Button variant="danger">
+                                        <Button variant="danger" onClick={()=> deletePaciente(pacientes.id)}>
                                             <FaTrash />
                                         </Button>
-                                        <Link to={`/diagnosispatient/`}>
+                                        <Link to={`/diagnosispatient/${pacientes.id}`}>
                                             <Button variant="success">
                                                 <FaArrowRight />
                                             </Button>

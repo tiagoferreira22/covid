@@ -1,11 +1,15 @@
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ValidationCPF from '../form/ValidationCPF';
 
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
@@ -13,10 +17,42 @@ import style from './PatientDiagnosis.module.css';
 import foto from '../assets/img/cachorro.jpg';
 import ValidationPhone from '../form/ValidationPhone';
 
+interface DataPatient {
+    id: number;
+    status: string;
+    nome: string;
+    cpf: string;
+    telefone: string;
+    dataNascimento: string;
+    perfil: string;
+}
+
 function PatientDiagnosis() {
+
+    const { id } = useParams<{ id: string }>();
+    const [paciente, setPaciente] = useState<DataPatient | null>(null);
+
+    useEffect(() => {
+
+        axios.get(`http://localhost:8000/api/paciente/${id}`)
+            .then(response => {
+                setPaciente(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }, []);
+
+    if (!paciente) {
+        return (
+            <Alert className='alertCenter' variant="secondary">
+                <p>Não há dados para serem exibidos! :/</p>
+            </Alert>
+        )
+    }
     return (
         <Container className="mt-4">
-            <h1>Diagnóstico de Tiago Ferreira De Almeida</h1>
+            <h1>Diagnóstico de <u>{paciente.nome}</u></h1>
             <hr></hr>
 
             <div className="col-md-12">
@@ -33,7 +69,7 @@ function PatientDiagnosis() {
                                         <Form.Label>Nome Completo</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            value="Tiago Ferreira De Almeida"
+                                            value={paciente.nome}
                                             disabled
                                         />
                                     </Form.Group>
@@ -41,7 +77,7 @@ function PatientDiagnosis() {
                                     <Form.Group controlId="cpf">
                                         <Form.Label>CPF</Form.Label>
                                         <ValidationCPF
-                                            value="000.000.000-00"
+                                            value={paciente.cpf}
                                             disabled={true}
                                             validacao={false}
 
@@ -53,7 +89,7 @@ function PatientDiagnosis() {
                                             Número de Telefone
                                         </Form.Label>
                                         <ValidationPhone
-                                            value="(85) 99230-1006"
+                                            value={paciente.telefone}
                                             disabled={true}
                                         />
                                     </Form.Group>
@@ -64,7 +100,7 @@ function PatientDiagnosis() {
                                         </Form.Label>
                                         <Form.Control
                                             type="date"
-                                            value="2023-06-03"
+                                            value={paciente.dataNascimento}
                                             disabled
                                         />
                                     </Form.Group>
@@ -98,7 +134,7 @@ function PatientDiagnosis() {
                         <Card.Body>
                             <div className={style.cardTitle}>
                                 <Card.Title>Saúde do paciente</Card.Title>
-                                <Card.Title>Quais Sintomas?</Card.Title>
+                                <Card.Title>Sintomas</Card.Title>
                             </div>
                             <div className={style.forms}>
                                 <div className="col-md-6">
