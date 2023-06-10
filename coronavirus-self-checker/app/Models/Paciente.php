@@ -9,5 +9,6 @@ class Paciente extends Model
 {
     use HasFactory;
     protected $table = 'paciente';
-    protected $fillable = ['nome', 'cpf', 'telefone', 'dataNascimento', 'foto'];
+    protected $fillable = ['nome','cpf', 'telefone', 'dataNascimento', 'foto'];
+    public $timestamps = true;
 }

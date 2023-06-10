@@ -11,7 +11,7 @@ h1{
 
 .divEdit img{
     scale: 80%;
-    border-radius: 100%;
+    border-radius: 5%;
 }
 .voltarHome{
     width: 60px;
@@ -34,4 +34,20 @@ h1{
 
 .voltarHome svg:hover {
     transform: rotate(360deg);
+}
+
+.btnEdit{
+    transition: .5s;
+}
+
+.btnEdit:hover{
+    transform: scale(1.2) ;
+}
+
+.span{
+    text-transform: capitalize;
+    color: #222;
+    background: #ffbb33;
+    padding: 10px;
+    border-radius: 10px;    
 }

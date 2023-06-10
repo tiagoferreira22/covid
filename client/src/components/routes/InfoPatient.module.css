@@ -13,10 +13,18 @@
 
 
 .divInfo img{
-    scale: 80%;
-    border-radius: 100%;
+    scale: 90%;
+    padding: 10px;
+    border-radius: 5%;
 }
 
+.span{
+    text-transform: capitalize;
+    color: #222;
+    background: #ffbb33;
+    padding: 10px;
+    border-radius: 10px;    
+}
 
 .voltarHome{
     width: 60px;

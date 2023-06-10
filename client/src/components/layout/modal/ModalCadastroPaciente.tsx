@@ -1,48 +1,51 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import ValidationCPF from "../../form/ValidationCPF";
-import ValidationPhone from "../../form/ValidationPhone";
+import { useState } from 'react';
+import { IMaskInput } from 'react-imask';
+import { Button, Form, Modal } from 'react-bootstrap';
+import axios from 'axios';
+import style from './ModalCadastroPaciente.module.css';
 
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import style from "./ModalCadastroPaciente.module.css";
-
-interface FormData {
-  nome: string;
-  cpf: string;
-  telefone: string;
-  dataNascimento: string;
-  foto: File;
-}
-
-function Example() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-
-  const criarDado = async (data: FormData) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/paciente/",
-        data
-      );
-      console.log("Dado criado:", response.data);
-    } catch (error) {
-      console.error("Erro ao criar o dado:", error);
-    }
-  };
-
-  const onSubmit = (data: FormData) => {
-    criarDado(data);
-  };
-
+function ModalCadastro() {
   const [show, setShow] = useState(false);
+  const [nome, setNome] = useState('');
+  const [dataNascimento, setDataNascimento] = useState<string | null>(null);
+  const [cpf, setCpf] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [foto, setFoto] = useState<File | null>(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('dataNascimento', dataNascimento || ''); // Tratar como string vazia se for nulo
+    formData.append('cpf', cpf);
+    formData.append('telefone', telefone);
+    if (foto) {
+      formData.append('foto', foto);
+    } else {
+      formData.append('foto', '');
+    }
+
+    try {
+      await axios.post('http://localhost:8000/api/paciente/', formData);
+      window.location.reload();
+    } catch (error: any) {
+      if (error.response?.status === 422) {
+        const errors = error.response?.data.errors;
+        if (errors && errors.cpf) {
+          alert('Este cpf é inválido, verifique os dados e tente novamente.');
+        }
+      } else {
+        // Tratar outros erros
+      }
+    }
+
+    handleClose();
+  };
 
   return (
     <>
@@ -51,89 +54,96 @@ function Example() {
         className={style.btnModal}
         onClick={handleShow}
         style={{
-          transition: "0.5s",
+          transition: '0.5s',
         }}
       >
-        Cadastra paciente
+        Cadastrar paciente
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <h4 className="modal-tilte">Inserir novo paciente</h4>
+          <Modal.Title>Inserir dados do paciente:</Modal.Title>
         </Modal.Header>
-        <div className="modal-body">
-          <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Nome Completo
-              </label>
-              <input
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Nome completo</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                placeholder="Digite seu nome completo"
-                {...register("nome", { required: true })}
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                placeholder="Inserir nome completo..."
+                required
               />
-            </div>
+            </Form.Group>
 
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                CPF
-              </label>
-              <ValidationCPF
-                value=""
-                disabled={false}
-                validacao={true}
-                {...register("cpf", { required: true })}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Telefone
-              </label>
-              <ValidationPhone
-                value=""
-                disabled={false}
-                {...register("telefone", { required: true })}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Data de Nascimento
-              </label>
-              <input
+            <Form.Group className="mb-3">
+              <Form.Label>Data de nascimento</Form.Label>
+              <Form.Control
                 type="date"
-                className="form-control"
-                {...register("dataNascimento", {
-                  required: true,
-                })}
+                value={dataNascimento || ''}
+                onChange={(e) => setDataNascimento(e.target.value || null)} // Converter string vazia em nulo
+                required
               />
-            </div>
+            </Form.Group>
 
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Foto do paciente
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                accept=".jpg,.jpeg,.png"
-                {...register("foto", { required: true })}
+            <Form.Group className="mb-3">
+              <Form.Label>CPF</Form.Label>
+              <Form.Control
+                as={IMaskInput}
+                type="text"
+                name="cpf"
+                value={cpf}
+                onAccept={(value: string) => setCpf(value)}
+                onChange={(e) => setCpf(e.target.value)}
+                placeholder="000.000.000-00"
+                required
+                mask="000.000.000-00"
+                autoComplete="off"
               />
-            </div>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Telefone</Form.Label>
+              <Form.Control
+                as={IMaskInput}
+                type="text"
+                name="telefone"
+                value={telefone}
+                onAccept={(value: string) => setTelefone(value)}
+                onChange={(e) => setTelefone(e.target.value)}
+                placeholder="(00) 00000-0000"
+                required
+                mask="(00) 00000-0000"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Foto do Paciente</Form.Label>
+              <Form.Control
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                required
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setFoto(file);
+                  }
+                }}
+              />
+            </Form.Group>
             <button
               type="submit"
-              className={[style.btnModal, "btn btn-warning"].join(" ")}
-              style={{ marginTop: "10px", transition: ".5s" }}
+              className={[style.btnModal, 'btn btn-warning'].join(' ')}
+              style={{ marginTop: '10px', transition: '.5s' }}
             >
               Enviar
             </button>
-          </form>
-        </div>
+          </Form>
+        </Modal.Body>
       </Modal>
     </>
   );
 }
 
-export default Example;
+export default ModalCadastro;

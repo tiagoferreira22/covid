@@ -9,8 +9,7 @@ export default function NavBar() {
     return (
         <Navbar expand="lg" className={style.navbar}>
             <Container>
-                    <Link to={`/`} className='navbar-brand clinica'>{<FaClinicMedical />}</Link>
-                    
+                    <Link to={`/`} className='navbar-brand clinica'>{<FaClinicMedical />}</Link>      
             </Container>
         </Navbar>
     );

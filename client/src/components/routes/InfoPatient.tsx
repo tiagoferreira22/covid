@@ -1,7 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
-import foto from '../assets/img/cachorro.jpg';
 import { FaArrowLeft } from 'react-icons/fa';
 
 import Alert from 'react-bootstrap/Alert';
@@ -9,6 +8,7 @@ import Alert from 'react-bootstrap/Alert';
 import { Link, useParams } from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import {format} from 'date-fns'
 
 import style from './InfoPatient.module.css';
 
@@ -19,8 +19,12 @@ interface DataPatient {
     cpf: string;
     telefone: string;
     dataNascimento: string;
-    perfil: string;
+    foto: string;
+    created_at: string;
+    updated_at: string;
 }
+
+const fotoBaseUrlImage = 'http://localhost:8000/api/';
 
 export default function InfoPatient() {
 
@@ -40,15 +44,48 @@ export default function InfoPatient() {
 
     if (!paciente) {
         return (
-            <Alert className='alertCenter' variant="secondary">
-                <p>Não há dados para serem exibidos! :/</p>
-            </Alert>
+            <>
+        
+            <div style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+                <Alert className="alertCenter" variant="secondary">
+                    <p>Não há dados para serem exibidos! :/</p>
+                </Alert>
+            </div>
+                <Link to={`/`}>
+                    <div className={style.voltarHome} style={{marginLeft: '30px'}}>
+                        <FaArrowLeft />
+                    </div>
+            </Link>
+        </>
         )
     }
+
+    //calcular a idade
+    function calcularIdade(dataNascimento: string): number {
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento);
+      
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const diferencaMeses = hoje.getMonth() - nascimento.getMonth();
+      
+        if (
+          diferencaMeses < 0 ||
+          (diferencaMeses === 0 && hoje.getDate() < nascimento.getDate())
+        ) {
+          idade--;
+        }
+      
+        return idade;
+      }
     
     return (
         <Container className="mt-4">
-            <h1>Informações do paciente</h1>
+            <h1>Ficha do paciente <span className={style.span}>{paciente.nome}</span></h1>
             <hr></hr>
 
             <div className="col-md-12">
@@ -62,45 +99,16 @@ export default function InfoPatient() {
                             gap: '20px',
                         }}
                     >
-                        <Card
-                            style={{
-                                width: '30rem',
-                                boxShadow: '2px 2px 10px #7d7d7d',
-                                padding: '20px 30px',
-                                height: '500px',
-                            }}
-                        >
-                            <h3
-                                className={[
-                                    style.Titulo,
-                                    'mb-2 card-title',
-                                ].join(' ')}
-                                style={{
-                                    fontWeight: 'bold'
-                                }}
-                            >
-                                {paciente.nome}
-                            </h3>
-                            <img src={foto} alt="" />
-                        </Card>
-                        <Card
-                            style={{
-                                width: '30rem',
-                                boxShadow: '2px 2px 10px #7d7d7d',
-                                padding: '20px 30px',
-                                height: '500px'
-                            }}
-                        >
-                            <Card.Body >
-                                <Card.Subtitle className="mb-2 text-muted"
-                            style={{
-                                display: 'felx',
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                            }}>
-                                    <p><span>Criado em 03/06/2023 às 12:50:27</span></p>
-                                    <p><span>Idade: 17 </span></p>
-                                    <p><span>Data de nascimento: {paciente.dataNascimento}</span></p>
+
+                        <Card style={{width: '30em'}}>
+                            <Card.Body>
+                                <Card.Img variant="top" src={fotoBaseUrlImage + paciente.foto}  style={{
+                                    scale: '95%',
+                                }}/>
+                                <Card.Subtitle className='text-muted'>
+                                    <p><span>Criado em {format(new Date(paciente.created_at), "dd/MM/yyyy 'às' HH:mm:ss")}</span></p>
+                                    <p><span>Idade: {calcularIdade(paciente.dataNascimento)}</span></p>
+                                    <p><span>Data de nascimento: {format(new Date(paciente.dataNascimento), "dd/MM/yyyy")}</span></p>
                                     <p><span>CPF: {paciente.cpf}</span></p>
                                     <p><span>Telefone: {paciente.telefone}</span></p>
                                     <p>
@@ -112,22 +120,25 @@ export default function InfoPatient() {
                                         </Alert>
                                         ) : paciente.status === "sintomas_insuficientes" ? (
                                         <Alert className={style.alertCenter} variant="success">
-                                        <p>Sintomas insuficientes</p>
+                                            <p>Sintomas insuficientes</p>
                                         </Alert>
                                         ) : paciente.status === "potencial_infectado" ? (
                                         <Alert className={style.alertCenter} variant="warning">
-                                        <p>Potencial infectado</p>
+                                            <p>Potencial infectado</p>
                                         </Alert>
                                         ) : paciente.status === "possivel_infectado" ? (
                                         <Alert className={style.alertCenter} variant="danger">
-                                        <p>Possível infectado</p>
+                                            <p>Possível infectado</p>
                                         </Alert>
                                         ) : (
-                                            <p className='alertTable'><Alert variant="info">Dados indisponíveis</Alert></p>
+                                        <Alert className={style.alertCenter} variant="info">
+                                            <p>Dados indisponíveis</p>
+                                        </Alert>
                                         )}
                                 </Card.Subtitle>
                             </Card.Body>
-                        </Card>
+                        </Card>                    
+
                     </div>
                 </div>
             </div>

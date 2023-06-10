@@ -56,12 +56,15 @@ export default function TableData() {
 
 
         const deletePaciente = async (id:number) => {
+
             const deleteComfirmacao = confirm('Tem certeza que quer deletar esse paciente?')
+
           if (deleteComfirmacao) {
             try {
                 await axios.delete(`http://localhost:8000/api/paciente/${id}`);
-              const response = await axios.get(`http://localhost:8000/api/paciente/${id}`);
+              const response = await axios.get(`http://localhost:8000/api/`);
               setPaciente(response.data);
+              window.location.reload();
             } catch (error) {
               console.log(error);
             }
@@ -100,10 +103,10 @@ export default function TableData() {
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
-                            {paciente.map((pacientes) => (
+                            {paciente.map((pacientes:any, indentificacao:number) => (
                                 <tr key={pacientes.id}>
-                                    <th scope="row">{pacientes.id}</th>
-                                    <td>{pacientes.nome}</td>
+                                    <th scope="row">{indentificacao + 1}</th>
+                                    <td style={{textTransform: 'capitalize'}}>{pacientes.nome}</td>
                                     <td>{pacientes.cpf}</td>
                                     <td>{calcularIdade(pacientes.dataNascimento)}</td>
                                     {pacientes.status === "sem_diagnostico" ? (
@@ -128,9 +131,12 @@ export default function TableData() {
                                                 <FaPen />
                                             </Button>
                                         </Link>
-                                        <Button variant="danger" onClick={()=> deletePaciente(pacientes.id)}>
-                                            <FaTrash />
-                                        </Button>
+                                        
+                                        <Link to="#" onClick={() => deletePaciente(pacientes.id)}>
+                                            <Button variant="danger">
+                                                <FaTrash />
+                                            </Button>
+                                        </Link>
                                         <Link to={`/diagnosispatient/${pacientes.id}`}>
                                             <Button variant="success">
                                                 <FaArrowRight />

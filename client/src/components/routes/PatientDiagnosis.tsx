@@ -5,7 +5,6 @@ import Alert from 'react-bootstrap/Alert';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ValidationCPF from '../form/ValidationCPF';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -15,7 +14,6 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import style from './PatientDiagnosis.module.css';
 import foto from '../assets/img/cachorro.jpg';
-import ValidationPhone from '../form/ValidationPhone';
 
 interface DataPatient {
     id: number;
@@ -52,7 +50,7 @@ function PatientDiagnosis() {
     }
     return (
         <Container className="mt-4">
-            <h1>Diagnóstico de <u>{paciente.nome}</u></h1>
+            <h1>Análise Diagnóstica de <span className={style.span}>{paciente.nome}</span></h1>
             <hr></hr>
 
             <div className="col-md-12">
@@ -71,16 +69,17 @@ function PatientDiagnosis() {
                                             type="text"
                                             value={paciente.nome}
                                             disabled
+                                            readOnly
                                         />
                                     </Form.Group>
 
                                     <Form.Group controlId="cpf">
                                         <Form.Label>CPF</Form.Label>
-                                        <ValidationCPF
+                                        <Form.Control
+                                            type="text"
                                             value={paciente.cpf}
-                                            disabled={true}
-                                            validacao={false}
-
+                                            disabled
+                                            readOnly
                                         />
                                     </Form.Group>
 
@@ -88,9 +87,11 @@ function PatientDiagnosis() {
                                         <Form.Label>
                                             Número de Telefone
                                         </Form.Label>
-                                        <ValidationPhone
+                                        <Form.Control
+                                            type="text"
                                             value={paciente.telefone}
-                                            disabled={true}
+                                            disabled
+                                            readOnly
                                         />
                                     </Form.Group>
 
@@ -102,6 +103,7 @@ function PatientDiagnosis() {
                                             type="date"
                                             value={paciente.dataNascimento}
                                             disabled
+                                            readOnly
                                         />
                                     </Form.Group>
                                 </Form>
@@ -145,7 +147,6 @@ function PatientDiagnosis() {
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value=""
                                                 placeholder="Digite sua Pressão Arterial"
                                             />
                                         </Form.Group>
@@ -155,7 +156,6 @@ function PatientDiagnosis() {
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value=""
                                                 placeholder="Digite sua Frequência Cardíaca"
                                             />
                                         </Form.Group>
@@ -165,7 +165,6 @@ function PatientDiagnosis() {
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value=""
                                                 placeholder="Digite sua Frequência Respitatória"
                                             />
                                         </Form.Group>
@@ -175,7 +174,6 @@ function PatientDiagnosis() {
                                             </Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value=""
                                                 placeholder="Digite sua Temperatura"
                                             />
                                         </Form.Group>
