@@ -24,3 +24,40 @@ No entanto, estamos abertos a receber opiniões e sugestões construtivas a fim 
 - `Funcionalidade 2`: Apresentação em forma de tabela dos dados registrados para cada paciente
 - `Funcionalidade 3`: Ver as informações do paciente
 - `Funcionalidade 5`: Deletar paciente
+
+# 🌻 Demontrações
+
+
+# ♦️ Tecnologias
+- <a href="https://axios-http.com/docs/intro">Axios</a>
+- <a href="https://legacy.reactjs.org/docs/getting-started.html">React</a>
+- <a href="https://react-bootstrap-v4.netlify.app/getting-started/introduction/">React Bootstrap</a>
+- <a href="https://www.typescriptlang.org/docs/">TypeScript</a>
+- <a href="https://laravel.com/docs/10.x/readme">Laravel 10</a>
+
+# ✈️ Dependências
+Antes de tudo, devemos apresentar as dependências que o projeto exije
+* Front-End
+    * @types/node: (20.2.5)
+    * @types/react: (18.0.37)
+    * @types/react-dom: (18.0.11)
+    * @typescript-eslint/eslint-plugin: (5.59.0)
+    * @typescript-eslint/parser: (5.59.0)
+    * @vitejs/plugin-react: (4.0.0)
+    * eslint: (8.38.0)
+    * eslint-plugin-react-refresh: (0.3.4)
+    * typescript: (5.0.2)
+    * vite: (4.3.9)
+    * axios: (1.4.0)
+    * bootstrap: (5.3.0)
+    * date-fns: (2.30.0)
+    * react: (18.2.0)
+    * react-bootstrap: (2.7.4)
+    * react-dom: (18.2.0)
+    * react-icons: (4.9.0)
+    * react-imask: (7.0.0-alpha.2)
+    * react-router-dom: (6.11.2)
+
+* Back-End
+    * php (v8.1)
+    * geekcom/validator-docs (v3.9)
