@@ -23,7 +23,7 @@ No entanto, estamos abertos a receber opiniões e sugestões construtivas a fim 
 - `Funcionalidade 1`: Cadastro de pacientes
 - `Funcionalidade 2`: Apresentação em forma de tabela dos dados registrados para cada paciente
 - `Funcionalidade 3`: Ver as informações do paciente
-- `Funcionalidade 5`: Deletar paciente
+- `Funcionalidade 4`: Deletar paciente
 
 # 🌻 Demontrações
 
