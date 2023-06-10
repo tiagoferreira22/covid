@@ -1,4 +1,10 @@
-# covid
+# C.O.V.I.D
+* C: Consulta
+* O: Online
+* V: Virtual
+* I: Inteligente
+* D: Diagnóstico
+
 Sistema desafio de gerenciamento médico para consultas de pacientes suspeitos de COVID-19. Desenvolvido utilizando uma abordagem FullStack, combina as poderosas tecnologias Laravel, React, React Bootstrap, Axios e TypeScript.
 
 # 🌠 Badges 
