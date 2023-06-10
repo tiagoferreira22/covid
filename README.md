@@ -61,3 +61,57 @@ Antes de tudo, devemos apresentar as dependências que o projeto exije
 * Back-End
     * php (v8.1)
     * geekcom/validator-docs (v3.9)
+
+# 🌲 Instalação
+Vamos seguir um processo passo a passo. Começaremos pela instalação do projeto. 
+É importante ter o Composer, o Node.js e o Git instalados em sua máquina para realizar essa tarefa. Certifique-se de tê-los configurados corretamente antes de prosseguir.
+
+1. Faça um fork desse repositório para o seu perfil
+```bash 
+$git clone https://github.com/tiagoferreira22/covid.git
+```
+2. Acesse o repositório do projeto
+```bash
+$cd coronavirus-self-checker
+```
+3. Instale as dependências do back-end
+```bash 
+$composer install
+```
+4. Aguarde até que as dependências sejam instaladas completamente.
+5. Copie e cole o arquivo `.env.example` com um novo nome: `.env`
+copie o comando:
+```bash
+$cp .env.example .env
+```
+6. Atualize as variáveis do arquivo de configuração, localizado em .env, com as informações adequadas. Se você ainda não criou um banco de dados, certifique-se de criá-lo antes de editar o arquivo .env.
+7. Gere uma chave para que o Laravel consiga se comunicar com o banco
+```bash
+$php artisan key:generate
+```
+8. Inicie o laravel
+```bash
+$php artisan serve
+```
+9. Abra outro terminal e acesse o diretório client, onde está a parte do front-end com React
+```bash
+$cd client/
+```
+10. Instale as dependências do front-end
+```bash
+$npm install
+```
+11. Se der algum erro, adicione --force ao final do comando
+```bash 
+$npm install --force
+```
+12. inicie o frontend com:
+```bash
+$npm run dev
+```
+13."Após concluir essas etapas, seu computador estará pronto para trabalhar com o projeto.
+
+# 🎯 Conclusão
+O código pode ser aprimorado com implementações adicionais, como o suporte para o registro de múltiplos usuários em um único sistema, aumentando a segurança e permitindo uma experiência mais personalizada para cada usuário.
+
+Feito com ❤️ by <a href="https://github.com/tiagoferreira22">Tiago Ferriera</a>
