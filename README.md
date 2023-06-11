@@ -96,30 +96,30 @@ $cp .env.example .env
 ```bash
 $php artisan key:generate
 ```
-8. Pronto para ser usado
+8. Abra outro terminal e acesse o diretório client, onde está a parte do front-end com React
+```bash
+$cd client/
+```
+9. Instale as dependências do front-end
+```bash
+$npm install
+```
+10. Se der algum erro, adicione --force ao final do comando
+```bash 
+$npm install --force
+```
+11. Pronto para ser usado
 
 # ✨ Como usar
 1. Inicie o laravel
 ```bash
 $php artisan serve
 ```
-2. Abra outro terminal e acesse o diretório client, onde está a parte do front-end com React
-```bash
-$cd client/
-```
-3. Instale as dependências do front-end
-```bash
-$npm install
-```
-4. Se der algum erro, adicione --force ao final do comando
-```bash 
-$npm install --force
-```
-5. inicie o frontend com:
+2. inicie o frontend com:
 ```bash
 $npm run dev
 ```
-6. Após concluir essas etapas, seu computador estará pronto para trabalhar com o projeto.
+3. Após concluir essas etapas, abra no navergador com o link que é dado no terminal e pronto seu computador já pode começar a trabalhar com o projeto.
 
 # 🎯 Conclusão
 O código pode ser aprimorado com implementações adicionais, como o suporte para o registro de múltiplos usuários em um único sistema, aumentando a segurança e permitindo uma experiência mais personalizadas para cada usuário.
