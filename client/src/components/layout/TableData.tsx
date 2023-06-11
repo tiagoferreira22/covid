@@ -1,7 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { FaEye, FaArrowRight, FaPen, FaTrash } from 'react-icons/fa';
-
 import Modal from "../layout/modal/ModalCadastroPaciente";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from './TableData.module.css';
@@ -39,7 +38,6 @@ export default function TableData() {
         fetchData();
     }, []);
 
-
     useEffect(() => {
         const findPaciente = async () => {
           if (id) {
@@ -54,7 +52,6 @@ export default function TableData() {
       
         findPaciente();
       }, [id]);
-
 
         const deletePaciente = async (id:number) => {
 
@@ -133,27 +130,11 @@ export default function TableData() {
                                                 <td className='alertTable'><Alert className={style.alertDiagnostico} variant="info">Dados indisponíveis</Alert></td>
                                             )}
                                             <td className={style.mr}>
-                                                <Link to={`/infopaciente/${pacientes.id}`}>
-                                                    <Button variant="primary">
-                                                        <FaEye />
-                                                    </Button>
-                                                </Link>
-                                                <Link to={`/editionpaciente/${pacientes.id}`}>
-                                                    <Button variant="warning">
-                                                        <FaPen />
-                                                    </Button>
-                                                </Link>
+                                                <Link to={`/infopaciente/${pacientes.id}`}> <Button variant="primary"> <FaEye /> </Button> </Link>
+                                                <Link to={`/editionpaciente/${pacientes.id}`}> <Button variant="warning"> <FaPen /> </Button> </Link>
                                                 
-                                                <Link to="#" onClick={() => deletePaciente(pacientes.id)}>
-                                                    <Button variant="danger">
-                                                        <FaTrash />
-                                                    </Button>
-                                                </Link>
-                                                <Link to={`/diagnosispatient/${pacientes.id}`}>
-                                                    <Button variant="success">
-                                                        <FaArrowRight />
-                                                    </Button>
-                                                </Link>
+                                                <Link to="#" onClick={() => deletePaciente(pacientes.id)}> <Button variant="danger"> <FaTrash /> </Button> </Link>
+                                                <Link to={`/diagnosispatient/${pacientes.id}`}> <Button variant="success"> <FaArrowRight /> </Button> </Link>
                                             </td>
                                         </tr>
                                     ))}
@@ -161,7 +142,6 @@ export default function TableData() {
                             </table>
                         )
                     }
-                    
                 </Card.Body>
             </Card>
         </>

@@ -7,8 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import { FaArrowLeft } from 'react-icons/fa';
 import style from './EditionPatient.module.css';
-import {format} from 'date-fns'
-
+import { format } from 'date-fns';
 
 interface DataPatient {
   id: number;
@@ -21,7 +20,6 @@ interface DataPatient {
 }
 
 const fotoBaseUrlImage = 'http://localhost:8000/api/';
-
 
 export default function EditionPatient() {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +42,7 @@ export default function EditionPatient() {
           cpf: response.data.cpf,
           telefone: response.data.telefone,
           dataNascimento: response.data.dataNascimento,
-          foto: null, 
+          foto: null,
         });
       })
       .catch((error) => {
@@ -69,30 +67,30 @@ export default function EditionPatient() {
       })
       .catch((error) => {
         console.log('Erro ao atualizar o paciente:', error);
-
       });
   };
 
   if (!paciente) {
     return (
-        <>
-        
-            <div style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-                <Alert className="alertCenter" variant="secondary">
-                    <p>Não há dados para serem exibidos! :/</p>
-                </Alert>
-            </div>
-                <Link to={`/`}>
-                    <div className={style.voltarHome} style={{marginLeft: '30px'}}>
-                        <FaArrowLeft />
-                    </div>
-                </Link>
-        </>
+      <>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Alert className="alertCenter" variant="secondary">
+            <p>Não há dados para serem exibidos! :/</p>
+          </Alert>
+        </div>
+        <Link to={`/`}>
+          <div className={style.voltarHome} style={{ marginLeft: '30px' }}>
+            <FaArrowLeft />
+          </div>
+        </Link>
+      </>
     );
   }
 
@@ -103,10 +101,7 @@ export default function EditionPatient() {
     let idade = hoje.getFullYear() - nascimento.getFullYear();
     const diferencaMeses = hoje.getMonth() - nascimento.getMonth();
 
-    if (
-      diferencaMeses < 0 ||
-      (diferencaMeses === 0 && hoje.getDate() < nascimento.getDate())
-    ) {
+    if (diferencaMeses < 0 || (diferencaMeses === 0 && hoje.getDate() < nascimento.getDate())) {
       idade--;
     }
 
@@ -117,7 +112,6 @@ export default function EditionPatient() {
     <Container className="mt-4 mb-5">
       <h1>Ajustando ficha do paciente <span className={style.span}>{paciente.nome}</span></h1>
       <hr></hr>
-
       <div className="col-md-12">
         <div className={style.divEdit}>
           <Card style={{ width: '40rem', boxShadow: '2px 2px 10px #7d7d7d', padding: '20px', height: '650px' }}>
@@ -126,86 +120,47 @@ export default function EditionPatient() {
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="fullName">
                   <Form.Label>Nome Completo</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="nome"
-                    value={formData.nome}
-                    placeholder="Digite seu nome completo"
-                    onChange={handleChange}
-                  />
+                  <Form.Control type="text" name="nome" value={formData.nome} placeholder="Digite seu nome completo" onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="cpf">
                   <Form.Label>CPF</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="cpf"
-                    value={formData.cpf}
-                    onChange={handleChange}
-                  />
+                  <Form.Control type="text" name="cpf" value={formData.cpf} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="phoneNumber">
                   <Form.Label>Número de Telefone</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="telefone"
-                    value={formData.telefone}
-                    onChange={handleChange}
-                  />
+                  <Form.Control type="text" name="telefone" value={formData.telefone} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="dob">
                   <Form.Label>Data de Nascimento</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name="dataNascimento"
-                    value={formData.dataNascimento}
-                    onChange={handleChange}
-                  />
+                  <Form.Control type="date" name="dataNascimento" value={formData.dataNascimento} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="photo">
                   <Form.Label>Foto do Paciente</Form.Label>
-                  <Form.Control
-                    type="file"
-                    accept=".jpg,.jpeg,.png"
-                    onChange={handleChange}
-                  />
+                  <Form.Control type="file" accept=".jpg,.jpeg,.png" onChange={handleChange} />
                 </Form.Group>
-                <button
-                    type="submit"
-                    className={[style.btnEdit, 'btn btn-warning'].join(' ')}
-                    style={{ marginTop: '10px', transition: '.5s' }}
-                    >
-                    Enviar
-                </button>
+                <button type="submit" className={[style.btnEdit, 'btn btn-warning'].join(' ')} style={{ marginTop: '10px', transition: '.5s' }}>Enviar</button>
               </Form>
             </Card.Body>
           </Card>
           <Card style={{ width: '23rem', boxShadow: '2px 2px 10px #7d7d7d', padding: '20px', height: '650px' }}>
             <Card.Body>
-              <Card.Img variant="top" src={fotoBaseUrlImage + paciente.foto}
-                                    alt=""
-                                    onError={() => {
-                                        console.log("Erro ao carregar a imagem");
-                                    }} />
+              <Card.Img variant="top" src={fotoBaseUrlImage + paciente.foto} alt="" onError={() => { console.log('Erro ao carregar a imagem'); }} />
               <br></br>
               <div className="card-text">
-                <p><span>Idade: </span>{calcularIdade(paciente.dataNascimento)} anos</p>
-                <p><span>Data de nascimento: </span>{format(new Date(paciente.dataNascimento), "dd/MM/yyyy")}</p>
-                <p><span>CPF: </span>{paciente.cpf}</p>
-                <p><span>Telefone: </span>{paciente.telefone}</p>
+                <p> <span>Idade: </span> {calcularIdade(paciente.dataNascimento)} anos </p>
+                <p> <span>Data de nascimento: </span> {format(new Date(paciente.dataNascimento), 'dd/MM/yyyy')} </p>
+                <p> <span>CPF: </span> {paciente.cpf} </p>
+                <p> <span>Telefone: </span> {paciente.telefone} </p>
               </div>
             </Card.Body>
           </Card>
         </div>
       </div>
-      <Link to={`/`}>
-        <div className={style.voltarHome}>
-          <FaArrowLeft />
-        </div>
-      </Link>
+      <Link to={`/`}><div className={style.voltarHome}><FaArrowLeft /></div></Link>
     </Container>
   );
 }

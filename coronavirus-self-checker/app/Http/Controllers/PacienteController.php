@@ -75,37 +75,37 @@ class PacienteController extends Controller
         return response()->json($pacientes, 201);
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $paciente = Paciente::find($id);
+     public function update(Request $request, $id)
+     {
+         $paciente = Paciente::find($id);
 
-    //     if (!$paciente) {
-    //         return response()->json(['message' => 'Paciente não encontrado'], 404);
-    //     }
+         if (!$paciente) {
+             return response()->json(['message' => 'Paciente não encontrado'], 404);
+         }
 
-    //     $this->validate($request, [
-    //         'nome' => 'required',
-    //         'dataNascimento' => 'required|date',
-    //         'cpf' => 'required|cpf',
-    //         'telefone' => 'required',
-    //         'foto' => 'required',
-    //     ]);
+         $this->validate($request, [
+             'nome' => 'required',
+             'dataNascimento' => 'required|date',
+             'cpf' => 'required|cpf',
+             'telefone' => 'required',
+             'foto' => 'required',
+         ]);
 
-    //     $paciente->nome = $request->input('nome');
-    //     $paciente->dataNascimento = $request->input('dataNascimento');
-    //     $paciente->cpf = $request->input('cpf');
-    //     $paciente->telefone = $request->input('telefone');
+         $paciente->nome = $request->input('nome');
+         $paciente->dataNascimento = $request->input('dataNascimento');
+         $paciente->cpf = $request->input('cpf');
+         $paciente->telefone = $request->input('telefone');
 
-    //     if ($request->hasFile('foto')) {
-    //         $foto = $request->file('foto');
-    //         $path = $foto->store('fotoImg');
-    //         $paciente->foto = $path;
-    //     }
+         if ($request->hasFile('foto')) {
+             $foto = $request->file('foto');
+             $path = $foto->store('fotoImg');
+             $paciente->foto = $path;
+         }
 
-    //     $paciente->save();
+         $paciente->save();
 
-    //     return response()->json($paciente);
-    // }
+         return response()->json($paciente);
+     }
 
     public function updateStatus(Request $request, $id)
     {

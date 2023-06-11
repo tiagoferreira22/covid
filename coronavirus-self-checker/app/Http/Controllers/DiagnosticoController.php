@@ -9,22 +9,19 @@ use App\Models\Paciente;
 class DiagnosticoController extends Controller
 {
     public function show($id)
-{
-    $sintomas = Diagnostico::where('id_paciente', $id)->first();
-
-    if (!$sintomas) {
-        return response()->json(['message' => 'Sintomas não encontrados para o paciente'], 404);
+    {
+        $sintomas = Diagnostico::where('id_paciente', $id)->first();
+        if (!$sintomas) {
+            return response()->json(['message' => 'Sintomas não encontrados para o paciente'], 404);
+        }
+        return response()->json($sintomas);
     }
-
-    return response()->json($sintomas);
-}
 
 
     public function store(Request $request)
     {   
         $dados = $request->all();
         $sintomas = new Diagnostico();
-
         $sintomas->id_paciente = $dados['pacienteId'];
 
         if (isset($dados['febre'])) {
@@ -97,32 +94,26 @@ class DiagnosticoController extends Controller
         } else {
             $sintomas->diarreia = false;
         }
-
         if (isset($dados['temperatura'])) {
             $sintomas->temperatura = $dados['temperatura'];
         } else {
             $sintomas->temperatura = 404;
         }
-
         if (isset($dados['pressaoSistolica'])) {
             $sintomas->pa_sistolica = $dados['pressaoSistolica'];
         } else {
             $sintomas->pa_sistolica = 404;
         }
-
         if (isset($dados['pressaoDiastolica'])) {
             $sintomas->pa_diastolica = $dados['pressaoDiastolica'];
         } else {
             $sintomas->pa_diastolica = 404;
         }
-
         if (isset($dados['frequenciaRespiratoria'])) {
             $sintomas->frq_respiratoria = $dados['frequenciaRespiratoria'];
         } else {
             $sintomas->frq_respiratoria = 404;
         }
-
-        // Salva os dados na tabela "sintomas"
         $sintomas->save();
 
         return response()->json(['message' => 'Dados salvos com sucesso'], 200);

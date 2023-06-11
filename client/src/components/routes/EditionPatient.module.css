@@ -1,53 +1,46 @@
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
 }
-.divEdit{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+.divEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
-
-
-.divEdit img{
-    scale: 80%;
-    border-radius: 5%;
+.divEdit img {
+  scale: 80%;
+  border-radius: 5%;
 }
-.voltarHome{
-    width: 60px;
-    height: 60px;
-    background: #ffbb33;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    position: absolute;
-    top: 75px;
+.voltarHome {
+  width: 60px;
+  height: 60px;
+  background: #ffbb33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  position: absolute;
+  top: 75px;
 }
-
-.voltarHome svg{
-    font-size: 60px;
-    transition: .5s;
-    padding: 12px;
-    color: #000;
+.voltarHome svg {
+  font-size: 60px;
+  transition: 0.5s;
+  padding: 12px;
+  color: #000;
 }
-
 .voltarHome svg:hover {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
 }
-
-.btnEdit{
-    transition: .5s;
+.btnEdit {
+  transition: 0.5s;
 }
-
-.btnEdit:hover{
-    transform: scale(1.2) ;
+.btnEdit:hover {
+  transform: scale(1.2);
 }
-
-.span{
-    text-transform: capitalize;
-    color: #222;
-    background: #ffbb33;
-    padding: 10px;
-    border-radius: 10px;    
+.span {
+  text-transform: capitalize;
+  color: #222;
+  background: #ffbb33;
+  padding: 10px;
+  border-radius: 10px;
 }

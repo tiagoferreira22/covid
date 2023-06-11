@@ -1,53 +1,44 @@
 .table tbody tr th,
 .table thead tr th,
-.table tbody tr td{
-    background: transparent;
+.table tbody tr td {
+  background: transparent;
 }
-
 .table tbody tr th,
-.table tbody tr td{
-    vertical-align: middle;
+.table tbody tr td {
+  vertical-align: middle;
 }
-
 .table .mr * {
-    margin-right: 3px;
+  margin-right: 3px;
 }
-
 .table .mr button {
-    transition: 0.5s;
-    padding: 10px 15px;
+  transition: 0.5s;
+  padding: 10px 15px;
 }
-
 .table .mr button:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
-
 .table .mr button * {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.table .alertDiagnostico{
-    text-transform: uppercase;
+.table .alertDiagnostico {
+  text-transform: uppercase;
 }
-
-.fotoZeroCadastro{
-    position: relative;
-    width: 30%;
+.fotoZeroCadastro {
+  position: relative;
+  width: 30%;
 }
-
-.conteudoZeroCadastro div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.conteudoZeroCadastro div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.conteudoCimaFoto{
-    color: #222;
-    z-index: 2;
-    left: 35%;
-    flex-direction: column;
-    font-weight: bold;
+.conteudoCimaFoto {
+  color: #222;
+  z-index: 2;
+  left: 35%;
+  flex-direction: column;
+  font-weight: bold;
 }

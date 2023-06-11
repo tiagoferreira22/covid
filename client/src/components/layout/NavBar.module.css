@@ -1,13 +1,11 @@
-.navbar{
-    background: #222;
+.navbar {
+  background: #222;
 }
-
 .navbar svg {
-    font-size: 40px;
-    color: #ffbb33;
+  font-size: 40px;
+  color: #ffbb33;
 }
-
-.navbar .clinica *{
-    transition: .5s;
-    cursor: pointer;
+.navbar .clinica * {
+  transition: 0.5s;
+  cursor: pointer;
 }
