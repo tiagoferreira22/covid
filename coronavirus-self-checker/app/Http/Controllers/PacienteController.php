@@ -23,8 +23,6 @@ class PacienteController extends Controller
             return response()->json(['message' => 'Paciente não encontrado'], 404);
         }
 
-        
-
         return response()->json($paciente);
     }
 
@@ -77,36 +75,44 @@ class PacienteController extends Controller
         return response()->json($pacientes, 201);
     }
 
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    // {
+    //     $paciente = Paciente::find($id);
+
+    //     if (!$paciente) {
+    //         return response()->json(['message' => 'Paciente não encontrado'], 404);
+    //     }
+
+    //     $this->validate($request, [
+    //         'nome' => 'required',
+    //         'dataNascimento' => 'required|date',
+    //         'cpf' => 'required|cpf',
+    //         'telefone' => 'required',
+    //         'foto' => 'required',
+    //     ]);
+
+    //     $paciente->nome = $request->input('nome');
+    //     $paciente->dataNascimento = $request->input('dataNascimento');
+    //     $paciente->cpf = $request->input('cpf');
+    //     $paciente->telefone = $request->input('telefone');
+
+    //     if ($request->hasFile('foto')) {
+    //         $foto = $request->file('foto');
+    //         $path = $foto->store('fotoImg');
+    //         $paciente->foto = $path;
+    //     }
+
+    //     $paciente->save();
+
+    //     return response()->json($paciente);
+    // }
+
+    public function updateStatus(Request $request, $id)
     {
-        $paciente = Paciente::find($id);
-
-        if (!$paciente) {
-            return response()->json(['message' => 'Paciente não encontrado'], 404);
-        }
-
-        $this->validate($request, [
-            'nome' => 'required',
-            'dataNascimento' => 'required|date',
-            'cpf' => 'required|cpf',
-            'telefone' => 'required',
-            'foto' => 'required',
-        ]);
-
-        $paciente->nome = $request->input('nome');
-        $paciente->dataNascimento = $request->input('dataNascimento');
-        $paciente->cpf = $request->input('cpf');
-        $paciente->telefone = $request->input('telefone');
-
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $path = $foto->store('fotoImg');
-            $paciente->foto = $path;
-        }
-
+        $paciente = Paciente::findOrFail($id);
+        $paciente->status = $request->input('status');
         $paciente->save();
 
-        return response()->json($paciente);
+        return response()->json(['message' => 'Status do paciente atualizado com sucesso']);
     }
-
 }

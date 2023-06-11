@@ -44,7 +44,7 @@ export default function EditionPatient() {
           cpf: response.data.cpf,
           telefone: response.data.telefone,
           dataNascimento: response.data.dataNascimento,
-          foto: null, // Defina o valor da foto conforme necessário
+          foto: null, 
         });
       })
       .catch((error) => {
@@ -66,11 +66,10 @@ export default function EditionPatient() {
       .put(`http://localhost:8000/api/paciente/${id}`, formData)
       .then((response) => {
         console.log('Paciente atualizado com sucesso:', response.data);
-        // Faça qualquer ação necessária após a atualização do paciente
       })
       .catch((error) => {
         console.log('Erro ao atualizar o paciente:', error);
-        // Trate o erro conforme necessário
+
       });
   };
 
@@ -92,7 +91,7 @@ export default function EditionPatient() {
                     <div className={style.voltarHome} style={{marginLeft: '30px'}}>
                         <FaArrowLeft />
                     </div>
-            </Link>
+                </Link>
         </>
     );
   }
@@ -200,43 +199,6 @@ export default function EditionPatient() {
               </div>
             </Card.Body>
           </Card>
-        </div>
-        <div style={{
-           marginTop: '20px',display: 'flex',justifyContent: 'center', alignItems:'center',
-        }}>
-        <Card style={{ width: '65em', boxShadow: '2px 2px 10px #e5e5e5', }}>
-                <Card.Body>
-                    <table className={[style.table, 'table'].join(' ')}>
-                        <thead>
-                            <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Idade</th>
-                                <th scope="col">Diagnóstico</th>
-                            </tr>
-                        </thead>
-                        <tbody className="table-group-divider">
-                                <tr key={paciente.id}>
-                                    <td style={{textTransform: 'capitalize'}}>{paciente.nome}</td>
-                                    <td>{paciente.cpf}</td>
-                                    <td>{calcularIdade(paciente.dataNascimento)}</td>
-                                    {paciente.status === "sem_diagnostico" ? (
-                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="secondary">Não diagnosticado</Alert></td>
-                                    ) : paciente.status === "sintomas_insuficientes" ? (
-                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="success">Sintomas insuficientes</Alert></td>
-                                    ) : paciente.status === "potencial_infectado" ? (
-                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="warning">Potencial Infectado</Alert></td>
-                                    ) : paciente.status === "possivel_infectado" ? (
-                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="danger">Possível infectado</Alert></td>
-                                    ) : (
-                                        <td className='alertTable'><Alert className={style.alertDiagnostico} variant="info">Dados indisponíveis</Alert></td>
-                                    )}
-                                    <td className={style.mr}></td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </Card.Body>
-            </Card>
         </div>
       </div>
       <Link to={`/`}>

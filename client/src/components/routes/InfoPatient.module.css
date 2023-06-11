@@ -1,50 +1,72 @@
-.Titulo{
-    text-align: center;
+.Titulo {
+  text-align: center;
 }
-.divInfo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.divInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.divInfo .alertCenter p{
-    text-align: center;
-    margin-bottom: 0;
-}
-
-
-.divInfo img{
-    scale: 90%;
-    padding: 10px;
-    border-radius: 5%;
+.divInfo .alertCenter p {
+  text-align: center;
+  margin-bottom: 0;
 }
 
-.span{
-    text-transform: capitalize;
-    color: #222;
-    background: #ffbb33;
-    padding: 10px;
-    border-radius: 10px;    
+.divInfo img {
+  scale: 90%;
+  padding: 10px;
+  border-radius: 5%;
 }
 
-.voltarHome{
-    width: 60px;
-    height: 60px;
-    background: #ffbb33;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    position: absolute;
-    top: 75px;
+.span {
+  text-transform: capitalize;
+  color: #222;
+  background: #ffbb33;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.voltarHome svg{
-    font-size: 60px;
-    transition: .5s;
-    padding: 12px;
-    color: #000;
+.voltarHome {
+  width: 60px;
+  height: 60px;
+  background: #ffbb33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  position: absolute;
+  top: 75px;
+}
+
+.voltarHome svg {
+  font-size: 60px;
+  transition: 0.5s;
+  padding: 12px;
+  color: #000;
 }
 
 .voltarHome svg:hover {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.sem_diagnostico,
+.sintomas_insuficientes,
+.potencial_infectado,
+.possivel_infectado {
+    margin-bottom: 20px;
+}
+
+.sem_diagnostico {
+  box-shadow: 0px 0px 20px #a8a9aa;
+}
+
+.sintomas_insuficientes {
+  box-shadow: 0px 0px 20px #a7e1c7;
+}
+
+.potencial_infectado {
+  box-shadow: 0px 0px 20px #f9e49d;
+}
+
+.possivel_infectado {
+  box-shadow: 0px 0px 20px #f8b0b6;
 }

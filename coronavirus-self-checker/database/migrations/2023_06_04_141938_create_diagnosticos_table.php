@@ -11,24 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('diagnosticos', function (Blueprint $table) {
+        Schema::create('sintomas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pacient_id');
-            $table->foreign('pacient_id')->references('id')->on('paciente')->onDelete('cascade');
+            $table->unsignedBigInteger('id_paciente');
+            $table->foreign('id_paciente')->references('id')->on('paciente')->onDelete('cascade');
             $table->boolean('febre')->default(0);
             $table->boolean('coriza')->default(0);
-            $table->boolean('nariz_ent')->default(0);
+            $table->boolean('nariz_entupido')->default(0);
             $table->boolean('cansaco')->default(0);
             $table->boolean('tosse')->default(0);
-            $table->boolean('dor_cab')->default(0);
+            $table->boolean('dor_cabeca')->default(0);
             $table->boolean('dor_corpo')->default(0);
             $table->boolean('mal_estar')->default(0);
             $table->boolean('dor_garganta')->default(0);
             $table->boolean('dif_respirar')->default(0);
             $table->boolean('falta_paladar')->default(0);
             $table->boolean('falta_olfato')->default(0);
-            $table->boolean('dif_loc')->default(0);
+            $table->boolean('dif_locomocao')->default(0);
             $table->boolean('diarreia')->default(0);
+    
+            $table->integer('temperatura')->default(0);
+            $table->integer('pa_sistolica')->default(0);
+            $table->integer('pa_diastolica')->default(0);
+            $table->integer('frq_respiratoria')->default(0);
+    
             $table->timestamps();
         });
     }

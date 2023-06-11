@@ -3,7 +3,6 @@ import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TableData from "../layout/TableData";
 import style from "./Home.module.css";
-import DarkMode from "../layout/DarkMode";
 
 function Home() {
   return (

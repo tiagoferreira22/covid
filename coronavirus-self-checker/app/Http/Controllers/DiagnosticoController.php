@@ -3,29 +3,129 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Diagnostico;
+use App\Models\Paciente;
 
 class DiagnosticoController extends Controller
 {
-    public function store(Request $request,$id){
-        $paciente = paciente::where('id', $id)->get()->first();
+    public function show($id)
+{
+    $sintomas = Diagnostico::where('id_paciente', $id)->first();
 
-        $pacienteStatus = ((count($request->all()) - 1) * 100) / 14;
-        $diag = Diagnostic::calcDiag($pacienteStatus);
-        $request['paciente_id'] = $id;
-        paciente::where('id', $paciente->id)->update(['diagnostic' => $diag]);
-        Diagnostic::create($request->all());
+    if (!$sintomas) {
+        return response()->json(['message' => 'Sintomas não encontrados para o paciente'], 404);
     }
 
-    // public function store(Request $request)
-    // {
-    //     $paciente = new paciente;
-    //     $paciente->nome = $request->nome;
-    //     $paciente->cpf = $request->cpf;
-    //     $paciente->telefone = $request->telefone;
-    //     $paciente->dataNascimento = $request->dataNascimento;
-    //     $paciente->status = $request->status;
-    //     $paciente->foto = $request->foto;
-    //     $paciente->save();
-    //     return response()->json($paciente, 201);
-    // }
+    return response()->json($sintomas);
+}
+
+
+    public function store(Request $request)
+    {   
+        $dados = $request->all();
+        $sintomas = new Diagnostico();
+
+        $sintomas->id_paciente = $dados['pacienteId'];
+
+        if (isset($dados['febre'])) {
+            $sintomas->febre = $dados['febre'];
+        } else {
+            $sintomas->febre = false;
+        }
+        if (isset($dados['coriza'])) {
+            $sintomas->coriza = $dados['coriza'];
+        } else {
+            $sintomas->coriza = false;
+        }
+        if (isset($dados['narizentupido'])) {
+            $sintomas->nariz_entupido = $dados['narizentupido'];
+        } else {
+            $sintomas->nariz_entupido = false;
+        }
+        if (isset($dados['cansaco'])) {
+            $sintomas->cansaco = $dados['cansaco'];
+        } else {
+            $sintomas->cansaco = false;
+        }
+        if (isset($dados['tosse'])) {
+            $sintomas->tosse = $dados['tosse'];
+        } else {
+            $sintomas->tosse = false;
+        }
+        if (isset($dados['dorcabeca'])) {
+            $sintomas->dor_cabeca = $dados['dorcabeca'];
+        } else {
+            $sintomas->dor_cabeca = false;
+        }
+        if (isset($dados['dorcorpo'])) {
+            $sintomas->dor_corpo = $dados['dorcorpo'];
+        } else {
+            $sintomas->dor_corpo = false;
+        }
+        if (isset($dados['malestar'])) {
+            $sintomas->mal_estar = $dados['malestar'];
+        } else {
+            $sintomas->mal_estar = false;
+        }
+        if (isset($dados['dorgarganta'])) {
+            $sintomas->dor_garganta = $dados['dorgarganta'];
+        } else {
+            $sintomas->dor_garganta = false;
+        }
+        if (isset($dados['dificuldaderespirar'])) {
+            $sintomas->dif_respirar = $dados['dificuldaderespirar'];
+        } else {
+            $sintomas->dif_respirar = false;
+        }
+        if (isset($dados['faltapaladar'])) {
+            $sintomas->falta_paladar = $dados['faltapaladar'];
+        } else {
+            $sintomas->falta_paladar = false;
+        }
+        if (isset($dados['faltaolfato'])) {
+            $sintomas->falta_olfato = $dados['faltaolfato'];
+        } else {
+            $sintomas->falta_olfato = false;
+        }
+        if (isset($dados['dificuldadelocomocao'])) {
+            $sintomas->dif_locomocao = $dados['dificuldadelocomocao'];
+        } else {
+            $sintomas->dif_locomocao = false;
+        }
+        if (isset($dados['diarreia'])) {
+            $sintomas->diarreia = $dados['diarreia'];
+        } else {
+            $sintomas->diarreia = false;
+        }
+
+        if (isset($dados['temperatura'])) {
+            $sintomas->temperatura = $dados['temperatura'];
+        } else {
+            $sintomas->temperatura = 404;
+        }
+
+        if (isset($dados['pressaoSistolica'])) {
+            $sintomas->pa_sistolica = $dados['pressaoSistolica'];
+        } else {
+            $sintomas->pa_sistolica = 404;
+        }
+
+        if (isset($dados['pressaoDiastolica'])) {
+            $sintomas->pa_diastolica = $dados['pressaoDiastolica'];
+        } else {
+            $sintomas->pa_diastolica = 404;
+        }
+
+        if (isset($dados['frequenciaRespiratoria'])) {
+            $sintomas->frq_respiratoria = $dados['frequenciaRespiratoria'];
+        } else {
+            $sintomas->frq_respiratoria = 404;
+        }
+
+        // Salva os dados na tabela "sintomas"
+        $sintomas->save();
+
+        return response()->json(['message' => 'Dados salvos com sucesso'], 200);
+    }
+
 }

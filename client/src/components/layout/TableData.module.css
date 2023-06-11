@@ -33,21 +33,21 @@
     text-transform: uppercase;
 }
 
-/* .table tfoot tr td{
-    background: #222;
-    border-radius: 20px;
+.fotoZeroCadastro{
+    position: relative;
+    width: 30%;
 }
 
-.table tfoot td.tdFooter p {
-    color: #e2e2e2;
+.conteudoZeroCadastro div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.table tfoot td.tdFooter span {
-    color: #ffbb33;
+.conteudoCimaFoto{
+    color: #222;
+    z-index: 2;
+    left: 35%;
+    flex-direction: column;
+    font-weight: bold;
 }
-
-.table .tdFooter a {
-    text-decoration: none;
-    color: #cbcbcb;
-    transition: 0.5s;
-} */
