@@ -75,51 +75,51 @@ Vamos seguir um processo passo a passo. Começaremos pela instalação do projet
 
 1. Faça um fork desse repositório para o seu perfil
 ```bash 
-$git clone https://github.com/tiagoferreira22/covid.git
+git clone https://github.com/tiagoferreira22/covid.git
 ```
 2. Acesse o repositório do projeto
 ```bash
-$cd coronavirus-self-checker
+cd coronavirus-self-checker
 ```
 3. Instale as dependências do back-end
 ```bash 
-$composer install
+composer install
 ```
 4. Aguarde até que as dependências sejam instaladas completamente.
 5. Copie e cole o arquivo `.env.example` com um novo nome: `.env`
 copie o comando:
 ```bash
-$cp .env.example .env
+cp .env.example .env
 ```
 6. Atualize as variáveis do arquivo de configuração, localizado em .env, com as informações adequadas. Se você ainda não criou um banco de dados, certifique-se de criá-lo antes de editar o arquivo .env.
 7. Gere uma chave para que o Laravel consiga se comunicar com o banco
 ```bash
-$php artisan key:generate
+php artisan key:generate
 ```
-8. Pronto para ser usado
+8. Abra outro terminal e acesse o diretório client, onde está a parte do front-end com React
+```bash
+cd client/
+```
+9. Instale as dependências do front-end
+```bash
+npm install
+```
+10. Se der algum erro, adicione --force ao final do comando
+```bash 
+npm install --force
+```
+11. Pronto para ser usado
 
 # ✨ Como usar
 1. Inicie o laravel
 ```bash
-$php artisan serve
+php artisan serve
 ```
-2. Abra outro terminal e acesse o diretório client, onde está a parte do front-end com React
+2. inicie o frontend com:
 ```bash
-$cd client/
+npm run dev
 ```
-3. Instale as dependências do front-end
-```bash
-$npm install
-```
-4. Se der algum erro, adicione --force ao final do comando
-```bash 
-$npm install --force
-```
-5. inicie o frontend com:
-```bash
-$npm run dev
-```
-6. Após concluir essas etapas, seu computador estará pronto para trabalhar com o projeto.
+3. Após concluir essas etapas, abra no navergador com o link que é dado no terminal e pronto seu computador já pode começar a trabalhar com o projeto.
 
 # 🎯 Conclusão
 O código pode ser aprimorado com implementações adicionais, como o suporte para o registro de múltiplos usuários em um único sistema, aumentando a segurança e permitindo uma experiência mais personalizadas para cada usuário.
