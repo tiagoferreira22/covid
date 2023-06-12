@@ -33,7 +33,7 @@ No entanto, estamos abertos a receber opiniões e sugestões construtivas a fim 
 - `Funcionalidade 5`: Deletar paciente
 
 # 🎥 Demontrações
-
+<img src="coronavirus-self-checker/public/demonstracao.png" alt="Telas de demonstrações" />
 
 # 💻 Tecnologias
 - <a href="https://axios-http.com/docs/intro">Axios</a>
