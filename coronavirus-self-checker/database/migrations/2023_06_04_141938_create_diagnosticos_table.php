@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('dif_locomocao')->default(0);
             $table->boolean('diarreia')->default(0);
     
-            $table->boolean('temperatura')->default(0);
+            $table->float('temperatura')->default(0);
             $table->integer('pa_sistolica')->default(0);
             $table->integer('pa_diastolica')->default(0);
             $table->integer('frq_respiratoria')->default(0);

@@ -115,23 +115,6 @@ function PatientDiagnosis() {
     );
   }
 
-  // if (paciente.status !== 'sem_diagnostico') {
-  //   return (
-  //     <>
-  //       <div className="container">
-  //         <Alert className="alertCenter" variant="warning" style={{ width: '100%' }}>
-  //           <p>Você não pode realizar outro diagnóstico!. Podera editar o diagnóstico em editar</p>
-  //         </Alert>
-  //       </div>
-  //       <Link to={`/`}>
-  //         <div className={style.voltarHome} style={{ marginLeft: '30px' }}>
-  //           <FaArrowLeft />
-  //         </div>
-  //       </Link>
-  //     </>
-  //   );
-  // }
-
   return (
     <Container className="mt-4">
       <h1>Análise Diagnóstica de <span className={style.span}>{paciente.nome}</span></h1>
@@ -193,22 +176,22 @@ function PatientDiagnosis() {
                       <div className="col-md-6">
                         <Form.Group className="mb-3">
                           <Form.Label>Temperatura:</Form.Label>
-                          <Form.Control type="number" placeholder="Inserir temperatura" value={dadosSaude.temperatura} onChange={(e) => setDadosSaude({ ...dadosSaude, temperatura: e.target.value, }) } required />
+                          <Form.Control type="number" placeholder="Inserir temperatura | Ex: 41.5 ou 40" value={dadosSaude.temperatura} onChange={(e) => setDadosSaude({ ...dadosSaude, temperatura: e.target.value, }) } required />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                           <Form.Label>Pressão arterial sistólica:</Form.Label>
-                          <Form.Control type="number" placeholder="Inserir pressão sistólica" value={dadosSaude.pressaoSistolica} onChange={(e) => setDadosSaude({ ...dadosSaude, pressaoSistolica: e.target.value, }) } required />
+                          <Form.Control type="number" placeholder="Inserir pressão sistólica | Ex: 110 ou 120" value={dadosSaude.pressaoSistolica} onChange={(e) => setDadosSaude({ ...dadosSaude, pressaoSistolica: e.target.value, }) } required />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                           <Form.Label>Pressão arterial diastólica:</Form.Label>
-                          <Form.Control type="number" placeholder="Inserir pressão diastólica" value={dadosSaude.pressaoDiastolica} onChange={(e) => setDadosSaude({ ...dadosSaude, pressaoDiastolica: e.target.value, }) } required />
+                          <Form.Control type="number" placeholder="Inserir pressão diastólica | Ex: 50 ou 80" value={dadosSaude.pressaoDiastolica} onChange={(e) => setDadosSaude({ ...dadosSaude, pressaoDiastolica: e.target.value, }) } required />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                           <Form.Label>Frequência respiratória:</Form.Label>
-                          <Form.Control type="number" placeholder="Inserir frequência respiratória" value={dadosSaude.frequenciaRespiratoria} onChange={(e) => setDadosSaude({ ...dadosSaude, frequenciaRespiratoria: e.target.value, }) } required />
+                          <Form.Control type="number" placeholder="Inserir frequência respiratória | Ex: 14 ou 20" value={dadosSaude.frequenciaRespiratoria} onChange={(e) => setDadosSaude({ ...dadosSaude, frequenciaRespiratoria: e.target.value, }) } required />
                         </Form.Group>
                       </div>
                       <div className="col-md-6">
