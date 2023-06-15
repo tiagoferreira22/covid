@@ -26,10 +26,10 @@ interface DataPatient {
 
 interface DataSintomas {
   id: number;
-  temperatura: string;
-  pa_sistolica: string;
-  pa_diastolica: string;
-  frq_respiratoria: string;
+  temperatura: number;
+  pa_sistolica: number;
+  pa_diastolica: number;
+  frq_respiratoria: number;
   created_at: string;
   updated_at: string;
 }
@@ -39,7 +39,7 @@ const fotoBaseUrlImage = 'http://localhost:8000/api/';
 export default function InfoPatient() {
   const { id } = useParams<{ id: string }>();
   const [paciente, setPaciente] = useState<DataPatient | null>(null);
-  const [sintomas, setSintomas] = useState<DataSintomas | null>(null);
+  const [sintomas, setSintomas] = useState<DataSintomas[] | null>(null);
 
   useEffect(() => {
     axios
@@ -98,6 +98,32 @@ export default function InfoPatient() {
     return idade;
   }
 
+  //temperatura
+  function getStatusTemperatura(temperatura: number): string {
+    const limiteBaixo = 36;
+    const limiteAlto = 37.5;
+  
+    if (temperatura < limiteBaixo) {
+      return "(Hipotermia)";
+    } else if (temperatura >= limiteBaixo && temperatura < limiteAlto) {
+      return "(Normal)";
+    } else {
+      return "(Febre)";
+    }
+  }
+  
+  //frequencia respiratoria
+  function getClassificacaoFrequenciaRespiratoria(frq_respiratoria: number): string {
+    if (frq_respiratoria < 14) {
+      return "(Bradicárdio)";
+    } else if (frq_respiratoria >= 14 && frq_respiratoria <= 20) {
+      return "(Eupneico)";
+    } else {
+      return "(Taquipneico)";
+    }
+  }
+  
+
   return (
     <Container className="mt-4">
       <h1>Ficha do paciente <span className={style.span}>{paciente.nome}</span></h1>
@@ -140,6 +166,7 @@ export default function InfoPatient() {
           </div>
         </div>
         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} >
+          
           {paciente.status === 'sem_diagnostico' ? (
             <Card style={{ boxShadow: '2px 2px 10px #e5e5e5' }}>
               <Card.Body>
@@ -172,32 +199,23 @@ export default function InfoPatient() {
                   <table className={[style.table, 'table'].join(' ')}>
                     <thead>
                       <tr>
+                        <th scope="col">#</th>
                         <th scope="col">Data da consulta</th>
                         <th scope="col">temperatura</th>
                         <th scope="col">Frequência Respiratória</th>
                         <th scope="col">Pressão Arterial</th>
-                        <th scope="col">Resultado</th>
                       </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                      <tr key={paciente.id}>
-                        <td>{format(new Date(sintomas.created_at), "dd/MM/yyyy 'às' HH:mm:ss")}</td>
-                        <td>{sintomas.temperatura}</td>
-                        <td>{sintomas.frq_respiratoria}</td>
-                        <td>{sintomas.pa_sistolica} x {sintomas.pa_diastolica}</td>
-                        {paciente.status === 'sem_diagnostico' ? (
-                          <td className="alertTable"> <Alert className={style.alertDiagnostico} variant="secondary"> Não diagnosticado </Alert> </td>
-                        ) : paciente.status === 'sintomas_insuficientes' ? (
-                          <td className="alertTable"> <Alert className={style.alertDiagnostico} variant="success"> Sintomas insuficientes </Alert> </td>
-                        ) : paciente.status === 'potencial_infectado' ? (
-                          <td className="alertTable"> <Alert className={style.alertDiagnostico} variant="warning"> Potencial Infectado </Alert> </td>
-                        ) : paciente.status === 'possivel_infectado' ? (
-                          <td className="alertTable"> <Alert className={style.alertDiagnostico} variant="danger"> Possível infectado </Alert> </td>
-                        ) : (
-                          <td className="alertTable"> <Alert className={style.alertDiagnostico} variant="info"> Dados indisponíveis </Alert> </td>
-                        )}
-                        <td className={style.mr}></td>
-                      </tr>
+                    {sintomas && sintomas.slice().reverse().map((sintoma, indentificacao:number) => (
+                          <tr key={sintoma.id}>
+                            <td scope="row" style={{fontWeight: 'bold'}}>{indentificacao + 1}</td>
+                            <td>{format(new Date(sintoma.created_at), "dd/MM/yyyy 'às' HH:mm:ss")}</td>
+                            <td>{sintoma.temperatura} °C {getStatusTemperatura(sintoma.temperatura)}</td>
+                            <td>{sintoma.frq_respiratoria} rpm {getClassificacaoFrequenciaRespiratoria(sintoma.frq_respiratoria)}</td>
+                            <td>{sintoma.pa_sistolica} mmHg x {sintoma.pa_diastolica} mmHg</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </Card.Body>

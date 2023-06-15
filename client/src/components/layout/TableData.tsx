@@ -112,7 +112,7 @@ export default function TableData() {
                                     </tr>
                                 </thead>
                                 <tbody className="table-group-divider">
-                                    {paciente.map((pacientes:any, indentificacao:number) => (
+                                    {paciente.slice().reverse().map((pacientes:any, indentificacao:number) => (
                                         <tr key={pacientes.id}>
                                             <th scope="row">{indentificacao + 1}</th>
                                             <td style={{textTransform: 'capitalize'}}>{pacientes.nome}</td>

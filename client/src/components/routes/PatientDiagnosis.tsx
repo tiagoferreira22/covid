@@ -115,22 +115,22 @@ function PatientDiagnosis() {
     );
   }
 
-  if (paciente.status !== 'sem_diagnostico') {
-    return (
-      <>
-        <div className="container">
-          <Alert className="alertCenter" variant="warning" style={{ width: '100%' }}>
-            <p>Você não pode realizar outro diagnóstico!. Podera editar o diagnóstico em editar</p>
-          </Alert>
-        </div>
-        <Link to={`/`}>
-          <div className={style.voltarHome} style={{ marginLeft: '30px' }}>
-            <FaArrowLeft />
-          </div>
-        </Link>
-      </>
-    );
-  }
+  // if (paciente.status !== 'sem_diagnostico') {
+  //   return (
+  //     <>
+  //       <div className="container">
+  //         <Alert className="alertCenter" variant="warning" style={{ width: '100%' }}>
+  //           <p>Você não pode realizar outro diagnóstico!. Podera editar o diagnóstico em editar</p>
+  //         </Alert>
+  //       </div>
+  //       <Link to={`/`}>
+  //         <div className={style.voltarHome} style={{ marginLeft: '30px' }}>
+  //           <FaArrowLeft />
+  //         </div>
+  //       </Link>
+  //     </>
+  //   );
+  // }
 
   return (
     <Container className="mt-4">

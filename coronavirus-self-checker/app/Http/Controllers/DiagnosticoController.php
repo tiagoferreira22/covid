@@ -8,14 +8,24 @@ use App\Models\Paciente;
 
 class DiagnosticoController extends Controller
 {
+    // public function show($id)
+    // {
+    //     $sintomas = Diagnostico::where('id_paciente', $id)->first();
+    //     if (!$sintomas) {
+    //         return response()->json(['message' => 'Sintomas não encontrados para o paciente'], 404);
+    //     }
+    //     return response()->json($sintomas);
+    // }
+
     public function show($id)
     {
-        $sintomas = Diagnostico::where('id_paciente', $id)->first();
-        if (!$sintomas) {
+        $sintomas = Diagnostico::where('id_paciente', $id)->get();
+        if ($sintomas->isEmpty()) {
             return response()->json(['message' => 'Sintomas não encontrados para o paciente'], 404);
         }
         return response()->json($sintomas);
     }
+
 
 
     public function store(Request $request)
